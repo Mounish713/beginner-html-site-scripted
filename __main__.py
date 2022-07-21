@@ -60,40 +60,40 @@ server = aws.ec2.Instance('web-server',
     subnet_id=publicsubnet.id,
  )
 
-rds_sg = aws.rds.SecurityGroup("rds_sg", 
-    ingress=[aws.rds.SecurityGroupIngressArgs(
-    cidr="10.0.0.0/24",
-    security_group_id=[group.id],
-    security_group_name=[group.name],
-    )]
-)
+#rds_sg = aws.rds.SecurityGroup("rds_sg", 
+    #ingress=[aws.rds.SecurityGroupIngressArgs(
+    #cidr="10.0.0.0/24",
+    #security_group_id=[group.id],
+    #security_group_name=[group.name],
+    #)]
+#)
 
 
-rds_server = aws.rds.Instance("db-server",
-    allocated_storage=10,
-    engine="mysql",
-    engine_version="5.7",
-    instance_class="db.t3.micro",
-    db_name="mydb",
-    parameter_group_name="default.mysql5.7",
-    password="database",
-    skip_final_snapshot=True,
-    username="database",
-    vpc_security_group_ids=[rds_sg.id],
-)
+#rds_server = aws.rds.Instance("db-server",
+ #   allocated_storage=10,
+  #  engine="mysql",
+   # engine_version="5.7",
+    #instance_class="db.t3.micro",
+    #db_name="mydb",
+   # parameter_group_name="default.mysql5.7",
+   # password="database",
+   # skip_final_snapshot=True,
+   # username="database",
+   # vpc_security_group_ids=[rds_sg.id],
+#)
 
-#bucket = aws.s3.Bucket("bucket",
- #   acl="public-read",
-  #  tags={
-   #     "Environment": "Dev",
-    #    "Name": "My bucket",
-   # })
+bucket = aws.s3.Bucket("bucket",
+  acl="public-read",
+  tags={
+      "Environment": "Dev",
+       "Name": "My bucket",
+    })
 
 
 #pulumi.export("vpcId", vpc.vpc_id)
 #pulumi.export("publicSubnetIds", vpc.public_subnet_ids)
 #pulumi.export("privateSubnetIds", vpc.private_subnet_ids)    
-#pulumi.export('bucket_name',  bucket.id)
+pulumi.export('bucket_name',  bucket.id)
 #pulumi.export('public_ip_db', default.public_id)
 #pulumi.export('public_dns_db', default.public_dns)
 pulumi.export('public_ip', server.public_ip)
