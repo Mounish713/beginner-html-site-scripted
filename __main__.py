@@ -82,20 +82,20 @@ rds_server = aws.rds.Instance("db-server",
     vpc_security_group_ids=[rds_sg.id],
 )
 
-#bucket = aws.s3.Bucket("bucket",
- #   acl="public-read",
-  #  tags={
-   #     "Environment": "Dev",
-    #    "Name": "My bucket",
-   # })
+bucket = aws.s3.Bucket("bucket",
+   acl="public-read",
+   tags={
+        "Environment": "Dev",
+        "Name": "My bucket",
+    })
 
 
-#pulumi.export("vpcId", vpc.vpc_id)
-#pulumi.export("publicSubnetIds", vpc.public_subnet_ids)
-#pulumi.export("privateSubnetIds", vpc.private_subnet_ids)    
-#pulumi.export('bucket_name',  bucket.id)
-#pulumi.export('public_ip_db', default.public_id)
-#pulumi.export('public_dns_db', default.public_dns)
+pulumi.export("vpcId", vpc.vpc_id)
+pulumi.export("publicSubnetIds", vpc.public_subnet_ids)
+pulumi.export("privateSubnetIds", vpc.private_subnet_ids)    
+pulumi.export('bucket_name',  bucket.id)
+pulumi.export('public_ip_db', default.public_id)
+pulumi.export('public_dns_db', default.public_dns)
 pulumi.export('public_ip', server.public_ip)
 pulumi.export('public_dns', server.public_dns)   
 
